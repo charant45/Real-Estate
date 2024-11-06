@@ -104,3 +104,24 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 4. If you haven’t already, consider adding a `LICENSE.md` file to your project with the appropriate license text.
 
 This README will effectively communicate the purpose and structure of your project to other developers or users. 
+
+## Screenshots
+
+Here are some screenshots of the application in action:
+
+### Login Page
+![Login Page](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899029/php-project/Screenshot_200_lcjp98.png)
+
+### Register Page
+![Register Page](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899285/php-project/Screenshot_201_p3hdxo.png)
+
+### Home Page
+![Home Page](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899029/php-project/Screenshot_202_phnoy5.png)
+
+![Home Page](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899031/php-project/Screenshot_207_m4mbmf.png)
+
+### Listing Page
+![Listing](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899029/php-project/Screenshot_208_iv7qdl.png)
+
+### Profile Page
+![Profile Page](https://res.cloudinary.com/dhja9jrwn/image/upload/v1730899029/php-project/Screenshot_206_zxwhxx.png)
