@@ -1,44 +1,66 @@
 <?php
-session_start();
+// auth.php
 require_once 'database.php';
+
+session_start();
 
 function is_logged_in()
 {
-    // Debugging: Check if the session variable is set
-    if (isset($_SESSION['user_id'])) {
-        echo "<!-- User is logged in with ID: {$_SESSION['user_id']} -->";
-        return true;
-    } else {
-        echo "<!-- User is not logged in -->";
-        return false;
-    }
+    return isset($_SESSION['user_id']);
 }
 
 function login($username, $password)
 {
     global $db;
-    $user = $db->login($username, $password);
+    $user = $db->loginUser($username, $password);
     if ($user) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        // Debugging: Confirm session variables are set
-        echo "<!-- Login successful: User ID {$_SESSION['user_id']} -->";
         return true;
     }
-    echo "<!-- Login failed: Invalid credentials -->";
     return false;
 }
 
 function register($username, $password, $email)
 {
     global $db;
-    return $db->register($username, $password, $email);
+    if (empty($username) || empty($password) || empty($email)) {
+        return false;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    return $db->registerUser($username, $password, $email);
 }
 
 function logout()
 {
     session_unset();
     session_destroy();
-    // Debugging: Confirm logout
-    echo "<!-- User logged out -->";
+}
+
+function require_login()
+{
+    if (!is_logged_in()) {
+        header("Location: login.php");
+        exit();
+    }
+}
+
+function generate_csrf_token()
+{
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function verify_csrf_token($token)
+{
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+function sanitize_input($input)
+{
+    return htmlspecialchars(strip_tags(trim($input)), ENT_QUOTES, 'UTF-8');
 }
